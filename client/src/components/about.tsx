@@ -2,7 +2,7 @@ import { IdCard, Shield, Umbrella } from "lucide-react";
 
 export default function About() {
   return (
-    <section id="about" className="py-20 bg-gradient-to-br from-sage-green to-forest-green text-white">
+    <section id="about" className="py-20 bg-deep-forest text-white">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
