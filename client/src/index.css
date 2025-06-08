@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(44, 33%, 96%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(44, 33%, 94%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(103, 25%, 29%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(44, 33%, 94%);
+  --secondary-foreground: hsl(20, 14.3%, 4.1%);
+  --accent: hsl(92, 28%, 48%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(103, 25%, 29%);
+  --radius: 0.5rem;
+  
+  /* Custom colors for the landscaping theme */
+  --forest-green: hsl(103, 25%, 29%);
+  --sage-green: hsl(92, 28%, 48%);
+  --warm-brown: hsl(25, 42%, 41%);
+  --soft-yellow: hsl(44, 56%, 84%);
+  --cream: hsl(44, 33%, 96%);
+  --deep-forest: hsl(103, 42%, 17%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(103, 25%, 29%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(92, 28%, 48%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .forest-green {
+    color: var(--forest-green);
+  }
+  
+  .bg-forest-green {
+    background-color: var(--forest-green);
+  }
+  
+  .sage-green {
+    color: var(--sage-green);
+  }
+  
+  .bg-sage-green {
+    background-color: var(--sage-green);
+  }
+  
+  .warm-brown {
+    color: var(--warm-brown);
+  }
+  
+  .bg-warm-brown {
+    background-color: var(--warm-brown);
+  }
+  
+  .soft-yellow {
+    color: var(--soft-yellow);
+  }
+  
+  .bg-soft-yellow {
+    background-color: var(--soft-yellow);
+  }
+  
+  .cream {
+    color: var(--cream);
+  }
+  
+  .bg-cream {
+    background-color: var(--cream);
+  }
+  
+  .deep-forest {
+    color: var(--deep-forest);
+  }
+  
+  .bg-deep-forest {
+    background-color: var(--deep-forest);
+  }
+}
