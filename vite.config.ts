@@ -33,5 +33,15 @@ export default defineConfig({
       strict: true,
       deny: ["**/.*"],
     },
+    proxy: {
+      // Proxy API requests to the Vercel dev server
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    },
+    port: 5173,
+    strictPort: true
   },
 });

@@ -1,12 +1,20 @@
-import type { Express } from "express";
-import { createServer, type Server } from "http";
+import type { Express, Request, Response, NextFunction } from "express";
+import express from "express";
 import { storage } from "./storage";
 import { insertContactMessageSchema } from "@shared/schema";
 import { z } from "zod";
 
-export async function registerRoutes(app: Express): Promise<Server> {
+type ExpressApp = Express & { _router?: any };
+
+export async function registerRoutes(app?: Express): Promise<ExpressApp> {
+  // If no app is provided, create a new one
+  const expressApp = app || express();
+  
+  // Add JSON body parser middleware
+  expressApp.use(express.json());
+  
   // Contact form submission endpoint
-  app.post("/api/contact", async (req, res) => {
+  expressApp.post("/api/contact", async (req: Request, res: Response) => {
     try {
       // Validate the request body
       const validatedData = insertContactMessageSchema.parse(req.body);
@@ -39,7 +47,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Get all contact messages (for admin purposes)
-  app.get("/api/contact", async (req, res) => {
+  expressApp.get("/api/contact", async (req: Request, res: Response) => {
     try {
       const messages = await storage.getContactMessages();
       res.json(messages);
@@ -52,6 +60,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  const httpServer = createServer(app);
-  return httpServer;
+  // Add a health check endpoint
+  expressApp.get("/api/health", (req: Request, res: Response) => {
+    res.status(200).json({ status: "ok" });
+  });
+
+  // Add a catch-all route for 404s
+  expressApp.use((req: Request, res: Response) => {
+    res.status(404).json({ 
+      success: false, 
+      message: "Route not found" 
+    });
+  });
+
+  // Error handling middleware
+  expressApp.use((err: any, req: Request, res: Response, next: NextFunction) => {
+    console.error('Unhandled error:', err);
+    res.status(500).json({ 
+      success: false, 
+      message: "Internal server error" 
+    });
+  });
+
+  return expressApp;
 }

@@ -1,17 +1,24 @@
 {
   "version": 3,
   "builds": [
-    { "src": "package.json", "use": "@vercel/static-build" },
-    { "src": "server/index.ts", "use": "@vercel/node" }
+    { "src": "package.json", "use": "@vercel/static-build", "config": { "distDir": "dist/public" } },
+    { "src": "api/index.ts", "use": "@vercel/node" },
+    { "src": "api/routes.ts", "use": "@vercel/node" },
+    { "src": "api/storage.ts", "use": "@vercel/node" },
+    { "src": "api/vite.ts", "use": "@vercel/node" }
   ],
+  "devCommand": "echo 'Vite is already running separately'",
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/server"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/"
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "^/(.*\\.(?:js|css|gif|jpg|jpeg|png|ico|svg|eot|otf|webp|ttf|woff|woff2|map|json|txt))$", "headers": { "cache-control": "public, max-age=31536000, immutable" }, "dest": "/$1" },
+    { "src": "^/(.*)", "dest": "/index.html" }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "build": {
+    "env": {
+      "NEXT_TELEMETRY_DISABLED": "1"
     }
-  ]
+  }
 }
